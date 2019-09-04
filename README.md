@@ -9,7 +9,12 @@
 cd f5-terraform-consul-sd-webinar/terraform/
 
 ```
-- Run terraform plan. terraform apply
+- Run terraform init, terraform plan, and terraform apply
+```
+terraform init
+terraform plan
+terraform apply
+```
 - This will create BIG-IP, consul, NGINX instances on AWS
 - Next we need to download and load AS3 rpm into BIG-IP, for AS3 documentation and download please refer to https://github.com/F5Networks/f5-appsvcs-extension
 - Once the rpm is installed on BIG-IP change the directory using ```cd f5-terraform-consul-sd-webinar/as3```
