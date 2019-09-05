@@ -1,5 +1,5 @@
 resource "aws_launch_configuration" "nginx" {
-  name_prefix                 = "nginx-"
+  name_prefix                 = "${var.prefix}-nginx-"
   image_id                    = "${data.aws_ami.ubuntu.id}"
   instance_type               = "t2.micro"
   associate_public_ip_address = true
@@ -16,9 +16,9 @@ resource "aws_launch_configuration" "nginx" {
 }
 
 resource "aws_autoscaling_group" "nginx" {
-  name                 = "nginx-asg"
+  name                 = "${var.prefix}-nginx-asg"
   launch_configuration = "${aws_launch_configuration.nginx.name}"
-  min_size             = 3
+  min_size             = 1
   max_size             = 5
   vpc_zone_identifier  = ["${module.vpc.public_subnets[0]}"]
 
@@ -29,7 +29,7 @@ resource "aws_autoscaling_group" "nginx" {
   tags = [
     {
       key                 = "Name"
-      value               = "nginx"
+      value               = "${var.prefix}-nginx"
       propagate_at_launch = true
     },
     {

@@ -21,7 +21,7 @@ EOF
 }
 
 resource "aws_iam_role" "consul" {
-  name = "consul"
+  name = "${var.prefix}-consul"
 
   assume_role_policy = <<EOF
 {
@@ -41,6 +41,6 @@ EOF
 }
 
 resource "aws_iam_instance_profile" "consul" {
-  name = "consul_sd"
+  name = "${var.prefix}-consul_sd"
   role = "${aws_iam_role.consul.name}"
 }
