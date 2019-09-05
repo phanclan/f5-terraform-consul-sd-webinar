@@ -85,18 +85,26 @@ sudo service consul start
 sudo service consul status
 
 #Install Dockers
+sudo apt-get update
+sudo apt-get install -y jq
 sudo snap install docker
 sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
 #Run  nginx
 sleep 10
+mkdir html
+echo "<h1>${HOSTNAME}</h1>" > ./html/index.html
 cat << EOF > docker-compose.yml
-web:
-  image: nginx
-  ports:
-  - "80:80"
-  restart: always
-  command: [nginx-debug, '-g', 'daemon off;']
+version: '3'
+services:
+  web:
+    image: nginx
+    volumes:
+      - ./html:/usr/share/nginx/html
+    ports:
+    - "80:80"
+    restart: always
+    command: [nginx-debug, '-g', 'daemon off;']
 EOF
 sudo docker-compose up -d

@@ -7,3 +7,4 @@
 *.tfvars
 
 *.pem
+.DS_Store

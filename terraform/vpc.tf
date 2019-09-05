@@ -18,6 +18,7 @@ module "vpc" {
 resource "aws_eip" "f5" {
   instance = "${aws_instance.f5.id}"
   vpc      = true
+  depends_on = [module.vpc]
 }
 
 resource "aws_security_group" "f5" {

@@ -17,3 +17,10 @@ data "aws_ami" "ubuntu" {
 
   owners = ["099720109477"] # Canonical
 }
+
+module "as3" {
+  source = "../as3"
+  address = aws_eip.f5.public_ip
+  username = "admin"
+  password = random_string.password.result
+}
