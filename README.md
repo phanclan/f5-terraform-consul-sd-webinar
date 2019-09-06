@@ -1,7 +1,7 @@
 # F5 BIG-IP Terraform & Consul Webinar - Zero Touch App Delivery with F5, Terraform & Consul
 - This repository will provision BIG-IP VE (Pay as you Grow), Consul & NGINX servers in AWS
 
-# Archictecture
+# Architecture
 ![Demo Arch](assets/f5_arch.png)
 
 # How to use this repo
@@ -57,9 +57,9 @@ Go here `curl -ku $CREDS https://${IP}:8443/mgmt/shared/appsvcs/info | jq`.
 
 You should see something like the following.
 ```
-version	"3.13.1"
-release	"1"
-schemaCurrent	"3.13.0"
+version	"3.7.0"
+release	"7"
+schemaCurrent	"3.7.0"
 schemaMinimum	"3.0.0"
 ```
 
@@ -120,13 +120,13 @@ nginx.sh is used to install consul agent on nginx servers
 
 # Verification
 1. Increase ASG to min of 2.
-  1. Note the extra nginx instance.
+    1. Note the extra nginx instance.
 1. Confirm in F5
-  1. Go to Local Traffic > Pools > web_pool > Members
-  1. Confirm that you see two members.
+    1. Go to Local Traffic > Pools > web_pool > Members
+    1. Confirm that you see two members.
 1. See list of nginx nodes from consul.
-  1. SSH into consul
-  1. Run the following command after ASG changes.
+    1. SSH into consul
+    1. Run the following command after ASG changes.
 ```
 curl http://10.0.0.100:8500/v1/catalog/service/nginx \
     | jq '.[].TaggedAddresses.lan'
